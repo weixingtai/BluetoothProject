@@ -1,7 +1,6 @@
 package com.lumex.bluetoothproject.graphic;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.lumex.bluetoothproject.R;
@@ -15,5 +14,6 @@ public class Graphic extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphic);
+
     }
 }
