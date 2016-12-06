@@ -1,15 +1,16 @@
 package com.lumex.bluetoothproject.configuration;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
 import com.lumex.bluetoothproject.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -31,8 +32,14 @@ public class DeviceConfiguration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configuration);
         lvConnect = (ListView)findViewById(R.id.lv_connect);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,bluetoothItem);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.config_list_item,bluetoothItem);
         lvConnect.setAdapter(arrayAdapter);
+        lvConnect.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(DeviceConfiguration.this,l+" 连接成功！",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         for(int i=0;i < imageUrls.length; i ++){
             ADInfo info = new ADInfo();

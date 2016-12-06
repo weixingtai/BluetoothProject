@@ -49,19 +49,19 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         switch (position) {
-            case GraphicPreview.PAGE_ONE:
+            case Graphic.PAGE_ONE:
                 fragment = keyboardFragment;
                 break;
-            case GraphicPreview.PAGE_TWO:
+            case Graphic.PAGE_TWO:
                 fragment = colorFragment;
                 break;
-            case GraphicPreview.PAGE_THREE:
+            case Graphic.PAGE_THREE:
                 fragment = textFragment;
                 break;
-            case GraphicPreview.PAGE_FOUR:
+            case Graphic.PAGE_FOUR:
                 fragment = styleFragment;
                 break;
-            case GraphicPreview.PAGE_FIVE:
+            case Graphic.PAGE_FIVE:
                 fragment = delayFragment;
                 break;
         }

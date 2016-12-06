@@ -38,9 +38,11 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphic);
+
+
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         bindViews();
-        rbKeyboard.setChecked(true);
+        rbColor.setChecked(true);
     }
 
     private void bindViews() {
@@ -51,10 +53,9 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
         rbKeyboard = (RadioButton) findViewById(R.id.rb_keyboard);
         rbStyle = (RadioButton) findViewById(R.id.rb_style);
         rgTabBar.setOnCheckedChangeListener(this);
-
         vpager = (ViewPager) findViewById(R.id.vpager);
         vpager.setAdapter(mAdapter);
-        vpager.setCurrentItem(0);
+        vpager.setCurrentItem(1);
         vpager.addOnPageChangeListener(this);
     }
 
@@ -87,6 +88,7 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onPageSelected(int position) {
+
     }
 
     @Override
