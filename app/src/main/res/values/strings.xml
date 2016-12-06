@@ -3,4 +3,9 @@
     <string name="config">DEVICE CONFIGURATION</string>
     <string name="command">AT COMMAND</string>
     <string name="graphic">GRAPHIC</string>
+    <string name="graphic_preview_text">Text</string>
+    <string name="graphic_preview_keyboard">Keyboard</string>
+    <string name="graphic_preview_color">Color</string>
+    <string name="graphic_preview_style">Style</string>
+    <string name="graphic_preview_delay">Delay</string>
 </resources>

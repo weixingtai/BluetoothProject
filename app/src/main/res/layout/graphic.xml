@@ -18,7 +18,6 @@
         android:gravity="center"
         android:layout_margin="30dp"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+<include layout="@layout/graphic_preview"/>
+
 </LinearLayout>

@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+
+    <RadioGroup
+        android:id="@+id/rg_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorText"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_keyboard"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/graphic_preview_keyboard"
+            android:text="@string/graphic_preview_keyboard" />
+
+        <RadioButton
+            android:id="@+id/rb_color"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/graphic_preview_color"
+            android:text="@string/graphic_preview_color" />
+
+        <RadioButton
+            android:id="@+id/rb_text"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/graphic_preview_text"
+            android:text="@string/graphic_preview_text" />
+
+        <RadioButton
+            android:id="@+id/rb_style"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/graphic_preview_style"
+            android:text="@string/graphic_preview_style" />
+
+        <RadioButton
+            android:id="@+id/rb_delay"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/graphic_preview_delay"
+            android:text="@string/graphic_preview_delay" />
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/div_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_above="@id/rg_tab_bar"
+        android:background="@color/colorText"
+        android:layout_alignParentTop="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rg_tab_bar"
+        />
+
+
+</RelativeLayout>

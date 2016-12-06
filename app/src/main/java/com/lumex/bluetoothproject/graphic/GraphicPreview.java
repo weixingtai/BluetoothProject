@@ -9,10 +9,10 @@ import android.widget.RadioGroup;
 import com.lumex.bluetoothproject.R;
 
 /**
- * Created by 阿泰Charles on 2016/12/03.
+ * Created by 阿泰Charles on 2016/12/05.
  */
 
-public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
+public class GraphicPreview extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
         ViewPager.OnPageChangeListener {
 
     //UI Objects
@@ -37,7 +37,7 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.graphic);
+        setContentView(R.layout.graphic_preview);
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         bindViews();
         rbKeyboard.setChecked(true);
@@ -54,7 +54,7 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
 
         vpager = (ViewPager) findViewById(R.id.vpager);
         vpager.setAdapter(mAdapter);
-        vpager.setCurrentItem(0);
+        vpager.setCurrentItem(1);
         vpager.addOnPageChangeListener(this);
     }
 
