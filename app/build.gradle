@@ -23,7 +23,6 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'jp.wasabeef:richeditor-android:1.2.1'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

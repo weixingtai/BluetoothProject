@@ -29,6 +29,7 @@ public class PreviewDelayFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tvTime.setText(i/10+" Seconds");
+
             }
 
             @Override
@@ -38,7 +39,6 @@ public class PreviewDelayFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
         return view;

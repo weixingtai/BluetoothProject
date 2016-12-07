@@ -170,6 +170,7 @@ public class ColorPickerView extends View {
                     mLeftMove = true;
                     proofLeft(x, y);
                     mRightPaint.setColor(getLeftColor(mLeftSelectPoint.x-SPLIT_WIDTH, mLeftSelectPoint.y-SPLIT_WIDTH));
+                    //Log.d("color",""+mRightPaint.getColor());
                 } else if (downInRight) {
                     mRightMove = true;
                     proofRight(x, y);
@@ -177,11 +178,14 @@ public class ColorPickerView extends View {
 
                 invalidate();
                 int rightColor = getRightColor(mRightSelectPoint.y - SPLIT_WIDTH);
+                //Log.d("color",""+rightColor);
                 if (mCallBackColor == Integer.MAX_VALUE || mCallBackColor != rightColor) {
                     mCallBackColor = rightColor;
                 } else {
                     break;
                 }
+
+
                 if (mChangedListener != null) {
                     mChangedListener.onColorChanged(mCallBackColor,
                             mRightPaint.getColor(),

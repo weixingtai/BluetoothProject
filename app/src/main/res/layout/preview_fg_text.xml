@@ -13,30 +13,35 @@
 
     </Spinner>
     <RadioGroup
+        android:id="@+id/group_text_align"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:button="@null"
         android:layout_gravity="center">
         <RadioButton
+            android:id="@+id/rb_align_left"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:button="@null"
             android:background="@drawable/preview_text_align_left_xml"/>
         <RadioButton
+            android:id="@+id/rb_align_right"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:button="@null"
             android:background="@drawable/preview_text_align_right_xml"/>
         <RadioButton
+            android:id="@+id/rb_align_center"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:button="@null"
             android:background="@drawable/preview_text_align_center_xml"/>
         <RadioButton
+            android:id="@+id/rb_align_vertical"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
@@ -49,9 +54,10 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <Button
+            android:id="@+id/btn_text_add_size"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:background="@drawable/preview_text_add_xml"/>
         <ImageView
             android:layout_width="30dp"
@@ -59,6 +65,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/preview_text_word_spacing"/>
         <Button
+            android:id="@+id/btn_text_reduce_size"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
@@ -70,6 +77,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <Button
+            android:id="@+id/btn_text_add_spacing"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
@@ -78,8 +86,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
-            android:background="@drawable/preview_text_vertical_spacin"/>
+            android:background="@drawable/preview_text_vertical_spacing"/>
         <Button
+            android:id="@+id/btn_text_reduce_spacing"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"

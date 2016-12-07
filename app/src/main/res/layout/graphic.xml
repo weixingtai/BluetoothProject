@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
@@ -11,13 +12,16 @@
         android:layout_margin="20dp"
         android:background="@drawable/main_logo"/>
 
-    <jp.wasabeef.richeditor.RichEditor
-        android:id="@+id/editor"
+    <EditText
+        android:id="@+id/edt_graphic_editor"
+        android:gravity="top"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:layout_margin="30dp"
+        android:layout_height="match_parent"
+        android:hint="      Tab to input text"
+        android:background="@drawable/edt_bg"
+        android:layout_weight="1"
         />
-<include layout="@layout/graphic_preview"/>
+    <include layout="@layout/graphic_preview" />
 
 </LinearLayout>
