@@ -3,8 +3,14 @@ package com.lumex.bluetoothproject.graphic;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.lumex.bluetoothproject.R;
 
@@ -23,9 +29,12 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
     private RadioButton rbKeyboard;
     private RadioButton rbStyle;
     private ViewPager vpager;
-
+    private EditText edtEditor;
+    private PerformEdit mPerformEdit;
+    private ImageView ivUndo;
+    private ImageView ivRedo;
     private MyFragmentPagerAdapter mAdapter;
-
+    private Button btnSave;
     //几个代表页面的常量
     public static final int PAGE_ONE = 0;
     public static final int PAGE_TWO = 1;
@@ -52,6 +61,35 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
         rbDelay = (RadioButton) findViewById(R.id.rb_delay);
         rbKeyboard = (RadioButton) findViewById(R.id.rb_keyboard);
         rbStyle = (RadioButton) findViewById(R.id.rb_style);
+        btnSave = (Button)findViewById(R.id.btn_top_save);
+        ivUndo = (ImageView)findViewById(R.id.ib_graphic_undo);
+        ivRedo = (ImageView)findViewById(R.id.ib_graphic_redo);
+        edtEditor = (EditText)findViewById(R.id.edt_graphic_editor);
+        mPerformEdit = new PerformEdit(edtEditor){
+            @Override
+            protected void onTextChanged(Editable s) {
+                //文本发生改变,可以是用户输入或者是EditText.setText触发.(setDefaultText的时候不会回调)
+                super.onTextChanged(s);
+            }
+        };
+        ivUndo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPerformEdit.undo();
+            }
+        });
+        ivRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPerformEdit.redo();
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Graphic.this,"save successful",Toast.LENGTH_SHORT).show();
+            }
+        });
         rgTabBar.setOnCheckedChangeListener(this);
         vpager = (ViewPager) findViewById(R.id.vpager);
         vpager.setAdapter(mAdapter);
