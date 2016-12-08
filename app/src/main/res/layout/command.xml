@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:text="+ Append New Command"
         android:textSize="20sp"
+        android:padding="18dp"
         android:background="@color/colorText"/>
     <ListView
         android:id="@+id/lv_command"

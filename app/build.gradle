@@ -1,9 +1,24 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+    }
+}
+greendao {
+    schemaVersion 1
+    daoPackage 'com.lumex.bluetoothproject.util.db'
+    targetGenDir 'src/main/java'
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.lumex.bluetoothproject"
         minSdkVersion 15
         targetSdkVersion 25
@@ -21,6 +36,7 @@ android {
 repositories {
     jcenter()
 }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
@@ -28,5 +44,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
     testCompile 'junit:junit:4.12'
 }
