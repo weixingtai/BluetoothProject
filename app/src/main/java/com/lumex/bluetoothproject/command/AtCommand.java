@@ -202,6 +202,9 @@ public class AtCommand extends AppCompatActivity {
             findCommand.setCommandCaption(newCaption);
             findCommand.setCommandContent(newContent);
             DBManager.getInstance(this).getDaoSession().getCommandDao().update(findCommand);
+            commandItem.clear();
+            commandItem.addAll(DBManager.getInstance(this).getDaoSession().getCommandDao().queryBuilder().build().list());
+            mCommandAdapter.notifyDataSetChanged();
         } else {
             Toast.makeText(AtCommand.this, "指令不存在！", Toast.LENGTH_SHORT);
         }
