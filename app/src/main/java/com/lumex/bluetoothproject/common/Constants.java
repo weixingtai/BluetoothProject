@@ -7,4 +7,6 @@ package com.lumex.bluetoothproject.common;
 public class Constants {
     /** 数据库名称 **/
     public static final String DB_NAME = "bluetooth_db";
+
+    /** 蓝牙连接 **/
 }
