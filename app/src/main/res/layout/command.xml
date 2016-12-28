@@ -4,6 +4,27 @@
     android:background="@color/colorText"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/button_break"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="onMyButtonClick"
+            android:layout_weight="1"
+            android:text="@string/button_break" />
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/button_break"/>
+
+    </LinearLayout>
     <Button
         android:id="@+id/btn_command_append"
         android:layout_width="match_parent"
