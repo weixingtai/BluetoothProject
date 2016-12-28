@@ -142,8 +142,6 @@ public class AtCommand extends AppCompatActivity {
         /**
          * 单击修改item
          */
-
-
         lvCommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -210,7 +208,6 @@ public class AtCommand extends AppCompatActivity {
 
     /**
      * 插入一个新的命令
-     *
      * @param id      command的id
      * @param caption command的标题
      * @param content command的内容
