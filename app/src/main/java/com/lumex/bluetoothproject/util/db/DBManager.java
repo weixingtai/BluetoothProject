@@ -2,7 +2,7 @@ package com.lumex.bluetoothproject.util.db;
 
 import android.content.Context;
 
-import com.lumex.bluetoothproject.common.Constants;
+import com.lumex.bluetoothproject.util.common.Constants;
 
 /**
  * Created by 阿泰Charles on 2016/12/08.

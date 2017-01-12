@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BluetoothProject</string>
+    <string name="app_name">Lumex</string>
     <string name="config">DEVICE CONFIGURATION</string>
     <string name="command">AT COMMAND</string>
     <string name="graphic">GRAPHIC</string>

@@ -128,9 +128,10 @@ public class AtCommand extends AppCompatActivity {
                                 String strContent = edtCommandContent.getText().toString();
 
                                 if (strCommand.equals("") || strContent.equals("")) {
-                                    Toast.makeText(getApplicationContext(), "command can not be null！" + strCommand, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),
+                                            "command can not be null！" + strCommand, Toast.LENGTH_LONG).show();
                                 } else {
-                                    addCommand(null, strCommand, strContent);
+                                    addCommand(null,1, strCommand, strContent);
                                 }
                             }
                         })
@@ -140,7 +141,7 @@ public class AtCommand extends AppCompatActivity {
         });
 
         /**
-         * 单击修改item
+         * 单击发送item
          */
         lvCommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -151,22 +152,41 @@ public class AtCommand extends AppCompatActivity {
                 Command oldCommand = findCommand(i);
                 String oldCommandContent = oldCommand.getCommandContent();
                 tvCommandContent.setText(oldCommandContent);
-                new AlertDialog.Builder(AtCommand.this).setTitle("发送命令")
-                        .setView(commandDialog)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String message = tvCommandContent.getText().toString();
-                                try {
-                                    message.getBytes("ISO_8859_1");
-                                } catch (UnsupportedEncodingException e) {
-                                    e.printStackTrace();
-                                }
-                                sendMessage(message);
+                int oldCommandType = oldCommand.getCommandType();
+                if (oldCommandType == 1){
+                    new AlertDialog.Builder(AtCommand.this).setTitle("发送命令")
+                            .setView(commandDialog)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String message = tvCommandContent.getText().toString();
+                                    try {
+                                        message.getBytes("ISO_8859_1");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                    sendMessage(message);
 
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .show();
+                                }
+                            })
+                            .setNegativeButton("取消", null)
+                            .show();
+                }else if(oldCommandType == 2){
+                    new AlertDialog.Builder(AtCommand.this).setTitle("发送命令")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String message = tvCommandContent.getText().toString();
+                                    try {
+                                        message.getBytes("ISO_8859_1");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                    sendMessage(message);
+                                }
+                            })
+                            .setNegativeButton("取消", null)
+                            .show();
+                }
+
             }
         });
 
@@ -212,9 +232,9 @@ public class AtCommand extends AppCompatActivity {
      * @param caption command的标题
      * @param content command的内容
      */
-    private void addCommand(Long id, String caption, String content) {
+    private void addCommand(Long id,int type, String caption, String content) {
         CommandDao commandDao = DBManager.getInstance(this).getDaoSession().getCommandDao();
-        Command command = new Command(id, caption, content);
+        Command command = new Command(id, type, caption, content);
         commandDao.insert(command);
 
         commandItem.clear();
@@ -344,8 +364,8 @@ public class AtCommand extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         // 蓝牙聊天服务站
-        if (mChatService != null)
-            mChatService.stop();
+//        if (mChatService != null)
+//            mChatService.stop();
         if (D)
             Log.e(TAG, "--- ON DESTROY ---");
     }
@@ -471,6 +491,11 @@ public class AtCommand extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 }
 
 

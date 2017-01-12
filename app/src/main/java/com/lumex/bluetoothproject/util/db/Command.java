@@ -11,6 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
 public class Command {
     @Id
     private Long id;
+    private int commandType;
     private String commandCaption;
     private String commandContent;
     public String getCommandContent() {
@@ -25,15 +26,23 @@ public class Command {
     public void setCommandCaption(String commandCaption) {
         this.commandCaption = commandCaption;
     }
+    public int getCommandType() {
+        return this.commandType;
+    }
+    public void setCommandType(int commandType) {
+        this.commandType = commandType;
+    }
     public Long getId() {
         return this.id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1135483298)
-    public Command(Long id, String commandCaption, String commandContent) {
+    @Generated(hash = 439351006)
+    public Command(Long id, int commandType, String commandCaption,
+            String commandContent) {
         this.id = id;
+        this.commandType = commandType;
         this.commandCaption = commandCaption;
         this.commandContent = commandContent;
     }

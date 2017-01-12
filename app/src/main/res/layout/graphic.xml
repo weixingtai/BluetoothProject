@@ -5,16 +5,18 @@
     android:layout_height="match_parent">
     <include layout="@layout/graphic_top_bar"/>
 
-
+    <ImageView
+        android:id="@+id/iv_graphic_preview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
     <EditText
         android:id="@+id/edt_graphic_editor"
         android:gravity="top"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="      Tab to input text"
+        android:layout_height="100dp"
+        android:hint="Tab to input text"
         android:background="@drawable/edt_bg"
-        android:layout_weight="1"
         />
 
     <include layout="@layout/graphic_preview" />

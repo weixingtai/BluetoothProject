@@ -1,4 +1,4 @@
-package com.lumex.bluetoothproject.common;
+package com.lumex.bluetoothproject.util.common;
 
 /**
  * Created by 阿泰Charles on 2016/12/08.

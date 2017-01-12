@@ -1,18 +1,26 @@
 package com.lumex.bluetoothproject.graphic;
 
+import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.lumex.bluetoothproject.R;
+import com.lumex.bluetoothproject.util.db.Command;
+import com.lumex.bluetoothproject.util.db.CommandDao;
+import com.lumex.bluetoothproject.util.db.DBManager;
 
 /**
  * Created by 阿泰Charles on 2016/12/03.
@@ -22,13 +30,14 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
         ViewPager.OnPageChangeListener {
 
     //UI Objects
+    private ImageView ivPreview;
     private RadioGroup rgTabBar;
     private RadioButton rbText;
     private RadioButton rbColor;
     private RadioButton rbDelay;
     private RadioButton rbKeyboard;
     private RadioButton rbStyle;
-    private ViewPager vpager;
+    private ViewPager vPager;
     private EditText edtEditor;
     private PerformEdit mPerformEdit;
     private ImageView ivUndo;
@@ -65,6 +74,7 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
         ivUndo = (ImageView)findViewById(R.id.ib_graphic_undo);
         ivRedo = (ImageView)findViewById(R.id.ib_graphic_redo);
         edtEditor = (EditText)findViewById(R.id.edt_graphic_editor);
+        ivPreview = (ImageView)findViewById(R.id.iv_graphic_preview);
         mPerformEdit = new PerformEdit(edtEditor){
             @Override
             protected void onTextChanged(Editable s) {
@@ -87,33 +97,64 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Graphic.this,"save successful",Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = LayoutInflater.from(Graphic.this);
+                LinearLayout commandDialog = (LinearLayout) inflater.inflate(R.layout.graphic_layout_dialog, null);
+                final EditText edtCommandCaption = (EditText) commandDialog.findViewById(R.id.edt_graphic_caption);
+                //final EditText edtCommandContent = (EditText) commandDialog.findViewById(R.id.edt_command_content);
+
+                new AlertDialog.Builder(Graphic.this).setTitle("添加命令")
+                        .setView(commandDialog)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String strCommand = edtCommandCaption.getText().toString();
+                                //String strContent = edtCommandContent.getText().toString();
+                                String myCommand="";
+                                String graphicCommandText = edtEditor.getText().toString();
+                                Typeface graphicCommandFont = edtEditor.getTypeface();
+                                float graphicCommandSize = edtEditor.getTextSize()-40;
+                                int graphicCommandColor = edtEditor.getCurrentTextColor();
+                                System.out.println("text: "+graphicCommandText+" font: "+graphicCommandFont+" size: "+graphicCommandSize+" color: "+graphicCommandColor);
+                                myCommand = MatrixConversion.BmpToMatrix(ivPreview,128,64,1,20,graphicCommandText, graphicCommandFont,graphicCommandSize, graphicCommandColor);
+                                //myCommand = MatrixConversion.BmpToMatrix(ivPreview,128,64,1,20,"1234567890",Typeface.DEFAULT_BOLD,16, Color.BLACK);
+                                if (strCommand.equals("")) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "command can not be null！" + strCommand, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    addCommand(null,2, strCommand, myCommand);
+                                }
+                            }
+
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
+                //Toast.makeText(Graphic.this,"save successful",Toast.LENGTH_SHORT).show();
             }
         });
         rgTabBar.setOnCheckedChangeListener(this);
-        vpager = (ViewPager) findViewById(R.id.vpager);
-        vpager.setAdapter(mAdapter);
-        vpager.setCurrentItem(1);
-        vpager.addOnPageChangeListener(this);
+        vPager = (ViewPager) findViewById(R.id.vpager);
+        vPager.setAdapter(mAdapter);
+        vPager.setCurrentItem(1);
+        vPager.addOnPageChangeListener(this);
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_keyboard:
-                vpager.setCurrentItem(PAGE_ONE);
+                vPager.setCurrentItem(PAGE_ONE);
                 break;
             case R.id.rb_color:
-                vpager.setCurrentItem(PAGE_TWO);
+                vPager.setCurrentItem(PAGE_TWO);
                 break;
             case R.id.rb_text:
-                vpager.setCurrentItem(PAGE_THREE);
+                vPager.setCurrentItem(PAGE_THREE);
                 break;
             case R.id.rb_style:
-                vpager.setCurrentItem(PAGE_FOUR);
+                vPager.setCurrentItem(PAGE_FOUR);
                 break;
             case R.id.rb_delay:
-                vpager.setCurrentItem(PAGE_FIVE);
+                vPager.setCurrentItem(PAGE_FIVE);
                 break;
         }
     }
@@ -133,7 +174,7 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
     public void onPageScrollStateChanged(int state) {
         //state的状态有三个，0表示什么都没做，1正在滑动，2滑动完毕
         if (state == 2) {
-            switch (vpager.getCurrentItem()) {
+            switch (vPager.getCurrentItem()) {
                 case PAGE_ONE:
                     rbKeyboard.setChecked(true);
                     break;
@@ -151,5 +192,17 @@ public class Graphic extends AppCompatActivity implements RadioGroup.OnCheckedCh
                     break;
             }
         }
+    }
+
+    /**
+     * 插入一个新的命令
+     * @param id      command的id
+     * @param caption command的标题
+     * @param content command的内容
+     */
+    private void addCommand(Long id,int type, String caption, String content) {
+        CommandDao commandDao = DBManager.getInstance(this).getDaoSession().getCommandDao();
+        Command command = new Command(id, type, caption, content);
+        commandDao.insert(command);
     }
 }

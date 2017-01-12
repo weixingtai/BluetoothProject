@@ -23,8 +23,9 @@ public class CommandDao extends AbstractDao<Command, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property CommandCaption = new Property(1, String.class, "commandCaption", false, "COMMAND_CAPTION");
-        public final static Property CommandContent = new Property(2, String.class, "commandContent", false, "COMMAND_CONTENT");
+        public final static Property CommandType = new Property(1, int.class, "commandType", false, "COMMAND_TYPE");
+        public final static Property CommandCaption = new Property(2, String.class, "commandCaption", false, "COMMAND_CAPTION");
+        public final static Property CommandContent = new Property(3, String.class, "commandContent", false, "COMMAND_CONTENT");
     };
 
 
@@ -41,8 +42,9 @@ public class CommandDao extends AbstractDao<Command, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COMMAND\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"COMMAND_CAPTION\" TEXT," + // 1: commandCaption
-                "\"COMMAND_CONTENT\" TEXT);"); // 2: commandContent
+                "\"COMMAND_TYPE\" INTEGER NOT NULL ," + // 1: commandType
+                "\"COMMAND_CAPTION\" TEXT," + // 2: commandCaption
+                "\"COMMAND_CONTENT\" TEXT);"); // 3: commandContent
     }
 
     /** Drops the underlying database table. */
@@ -59,15 +61,16 @@ public class CommandDao extends AbstractDao<Command, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
+        stmt.bindLong(2, entity.getCommandType());
  
         String commandCaption = entity.getCommandCaption();
         if (commandCaption != null) {
-            stmt.bindString(2, commandCaption);
+            stmt.bindString(3, commandCaption);
         }
  
         String commandContent = entity.getCommandContent();
         if (commandContent != null) {
-            stmt.bindString(3, commandContent);
+            stmt.bindString(4, commandContent);
         }
     }
 
@@ -79,15 +82,16 @@ public class CommandDao extends AbstractDao<Command, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
+        stmt.bindLong(2, entity.getCommandType());
  
         String commandCaption = entity.getCommandCaption();
         if (commandCaption != null) {
-            stmt.bindString(2, commandCaption);
+            stmt.bindString(3, commandCaption);
         }
  
         String commandContent = entity.getCommandContent();
         if (commandContent != null) {
-            stmt.bindString(3, commandContent);
+            stmt.bindString(4, commandContent);
         }
     }
 
@@ -100,8 +104,9 @@ public class CommandDao extends AbstractDao<Command, Long> {
     public Command readEntity(Cursor cursor, int offset) {
         Command entity = new Command( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // commandCaption
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // commandContent
+            cursor.getInt(offset + 1), // commandType
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // commandCaption
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // commandContent
         );
         return entity;
     }
@@ -109,8 +114,9 @@ public class CommandDao extends AbstractDao<Command, Long> {
     @Override
     public void readEntity(Cursor cursor, Command entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setCommandCaption(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setCommandContent(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCommandType(cursor.getInt(offset + 1));
+        entity.setCommandCaption(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCommandContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

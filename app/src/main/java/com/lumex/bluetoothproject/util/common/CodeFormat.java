@@ -1,4 +1,4 @@
-package com.lumex.bluetoothproject.common;
+package com.lumex.bluetoothproject.util.common;
 
 import java.io.ByteArrayOutputStream;
 import java.util.regex.Matcher;

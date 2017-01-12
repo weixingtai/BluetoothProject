@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lumex.bluetoothproject.R;
@@ -46,16 +47,26 @@ public class CommandAdapter extends BaseAdapter{
             view = LayoutInflater.from(mContext).inflate(R.layout.lv_command_list_item, null);
             viewHolder = new ViewHolder();
             viewHolder.tvCaption = (TextView) view.findViewById(R.id.tv_command_list_item);
+            viewHolder.ivType = (ImageView) view.findViewById(R.id.iv_command_list_type);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
         Command command = mCommandList.get(i);
+
         viewHolder.tvCaption.setText(String.valueOf(command.getCommandCaption()));
+        int mType = command.getCommandType();
+        if (mType == 1){
+            viewHolder.ivType.setImageResource(R.drawable.graphic_preview_text);
+        }else if (mType == 2){
+            viewHolder.ivType.setImageResource(R.drawable.graphic_preview_bmp);
+        }
+
         return view;
     }
     class ViewHolder{
         TextView tvCaption;
+        ImageView ivType;
     }
 }
